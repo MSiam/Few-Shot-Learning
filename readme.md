@@ -16,6 +16,8 @@ Metric learning methods have the advantage that they rapidly learn novel concept
 
 ### Activations to Parameters
 
+### Imprinted Weights
+
 ## HRI Setting:
 The fundamental differences between human robot interaction and the current few shot learning setting are: 
 1. the abundance of temporal information for the different poses of the object. 
