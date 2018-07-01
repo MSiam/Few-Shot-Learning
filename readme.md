@@ -87,11 +87,11 @@ A triplet loss similar to the above but using cosine distance is used. Their exp
 
 On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="40%" class="img-responsive" alt=""> </div>
+<div><img src="attkernel.png" width="30%" class="img-responsive" alt=""> </div>
 
 Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
 
-<div><img src="attention.png" width="40%" class="img-responsive" alt=""> </div>
+<div><img src="attention.png" width="50%" class="img-responsive" alt=""> </div>
 
 f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context. The support set is the set of few labeled samples. While f is an LSTM with attention. 
 
