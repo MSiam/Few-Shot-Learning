@@ -81,7 +81,7 @@ The previous approaches does not address the different viewpoints that can be av
 
 A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
-<div align="center"><img src="view_manifold.png" width="70%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
