@@ -87,7 +87,7 @@ A triplet loss similar to the above but using cosine distance is used. Their exp
 
 On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="30%" class="img-responsive" alt=""> </div>
+<div><img src="attkernel.png" width="20%" class="img-responsive" alt=""> </div>
 
 Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
 
