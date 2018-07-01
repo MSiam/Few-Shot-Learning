@@ -159,9 +159,7 @@ The fundamental differences between human robot interaction and the current few 
 ### KUKA Innovation Challenge:
 So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
 
-<iframe width="420" height="345"
-src="https://www.youtube.com/watch?v=aLcw73dt_Oo">
-</iframe>
+<video src="kuka.mp4" width="640" height="480" controls preload></video>
 
 Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
