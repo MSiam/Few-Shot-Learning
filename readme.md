@@ -1,16 +1,16 @@
 # Table of Content
 
 1. Few Shot Learning Literature 
-..1. Siamese Networks for One Shot Learning 
-..2. Matching Networks 
-..3. Meta-Agnostic Model Learning 
-..4. Triplet Networks 
-..5. Prototypical Networks 
-..6. Activations to Parameters 
-..7. Weight Imprinting 
+  1. Siamese Networks for One Shot Learning 
+  2. Matching Networks 
+  3. Meta-Agnostic Model Learning 
+  4. Triplet Networks 
+  5. Prototypical Networks 
+  6. Activations to Parameters 
+  7. Weight Imprinting 
 2. Human Robot Interaction Setting 
-..1. Differences to Few Shot Literature 
-..2. KUKA Innovation Challenge 
+  1. Differences to Few Shot Literature 
+  2. KUKA Innovation Challenge 
 
 # Few Sot Learning using HRI
 
