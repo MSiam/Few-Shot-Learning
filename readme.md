@@ -77,19 +77,23 @@ To sum it up there are three things to think of when desiging your method :
 
 The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the above but is specificaly designed to handle this [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
 
-<div><img src="cos.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="cos.png" width="45%" class="img-responsive" alt=""> </div>
 
 A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
-<div align="center"><img src="view_manifold.png" width="70%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
-On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour. It basically tries to learn this attention kernel:
+On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close.
+Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
+
+<div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
+
+f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context. The support set is the set of few labeled samples. While f is an LSTM with attention. 
 
 <div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
 
@@ -97,9 +101,16 @@ Where the possible class labels y are weighted with the a, which determines how 
 
 ### MAML
 
+Another direction in few shot learning that is away from metric based learning methods is meta learning. The MAML method [9] creates this model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
+<div><img src="maml.png" width="50%" class="img-responsive" alt=""> </div>
+
+For each sampled data points D we optimize using stochastic gradient descent and update the parameters based on this. But then a meta update is computed that sums the gradients over all tasks using the updated parameters \theta_i'. This is used to make a meta update to the parameters.
 
 ### Activations to Parameters
+
+This year CVPR had an interesting paper on few shsot learning that is showing really good results with a very intuitive idea. The method is based on learning a mapping between activations and parameters/weights. This mapping can then be used when we have new classes that have few labeled samples to get their corresponding weights to be used in the classification.
+
 
 ### Imprinted Weights
 
@@ -126,3 +137,5 @@ The fundamental differences between human robot interaction and the current few 
 [7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).
 
 [8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
+
+[9] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
