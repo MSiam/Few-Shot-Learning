@@ -57,6 +57,9 @@ X is the anchor sample, X+ is the positive sample, X- is the negative sample, D_
 
 #### Summary
 To sum it up there are three things to think of when desiging your method :
+
+<div align="center"><img src="metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
+
 * The base network architecture used in the siamese or triplet network.
 * The distance function applied on the output embeddings:
   * L2 distance (Euclidean)
@@ -67,10 +70,9 @@ To sum it up there are three things to think of when desiging your method :
   * Contrastive Loss
   * Triplet Loss
   * Cross Entropy
-  
- <div align="center"><img src="metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
- 
-  
+
+[Other useful resources regarding siamese networks for One shot Learning](https://hackernoon.com/one-shot-learning-with-siamese-networks-in-pytorch-8ddaab10340e).
+
 ### Matching Networks
 
 ### MAML
