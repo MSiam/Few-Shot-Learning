@@ -33,7 +33,11 @@ The few shot learning is formulated as a **m shot n way** classification problem
 <div><img src="omniglot.png" class="img-responsive" alt=""> </div>
 
 ### Siamese Networks
-Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. One of the earliest attempts was using siamese networks by Koch et al. and formulating the few shot learning problem as a verification task. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. The distance function used to learn the similarity can be in the form of a contrastive loss, or a weighted L1 distance. In Koch et al. paper they utilized the weighted L1 distance followed by a sigmoid function and cross entropy loss . Figure .. shows the network architecture used and an unofficial keras code is provided here.
+Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. One of the earliest attempts was using siamese networks by Koch et al [3]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. 
+
+The distance function used to learn the similarity can be in the form of a contrastive loss, or a weighted L1 distance. In Koch et al. paper they utilized the weighted L1 distance followed by a sigmoid function and cross entropy loss . 
+
+Figure .. shows the network architecture used and an unofficial keras code is provided here.
 
 ### Matching Networks
 
@@ -55,6 +59,8 @@ The fundamental differences between human robot interaction and the current few 
 
 
 [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
+
 [2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
+[3] Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.
 
