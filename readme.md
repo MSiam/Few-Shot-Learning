@@ -1,3 +1,17 @@
+# Table of Content
+
+1. Few Shot Learning Literature
+..1. Siamese Networks for One Shot Learning
+..2. Matching Networks
+..3. Meta-Agnostic Model Learning
+..4. Triplet Networks
+..5. Prototypical Networks
+..6. Activations to Parameters
+..7. Weight Imprinting
+2. Human Robot Interaction Setting
+..1. Differences to Few Shot Literature
+..2. KUKA Innovation Challenge
+
 # Few Sot Learning using HRI
 
 Few Shot Learning, the ability to learn from few labeled samples, is a vital step in robot manipulation. In order for robots to operate in dynamic and unstructured environments, they need to learn novel objects on the fly from few samples. The current object recognition methods using convolutional networks are based on supervised learning with large-scale datasets such as ImageNet, with hundreds or thousands labeled examples. However, even with large-scale datasets they remain limited in multiple aspects, not all objects in our lives is within the 1000 labels provided in ImageNet. Yet we are expecting robots to operate within homes, offices, roads and other unstructured environments where plenty of objects need to be learned on the fly. As humans we excel in learning novel concepts from few examples, to generalize to other instances and to continually update our knowledge about the environment. If we are aiming at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. My focus in this article is on how to enable robots to learn from few samples using human robot interaction.
