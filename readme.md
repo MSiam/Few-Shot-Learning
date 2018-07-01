@@ -77,7 +77,7 @@ To sum it up there are three things to think of when desiging your method :
 
 The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the above but is specificaly designed to handle this [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
 
-<div><img src="cos.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="cos.png" width="45%" class="img-responsive" alt=""> </div>
 
 A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
@@ -87,11 +87,11 @@ A triplet loss similar to the above but using cosine distance is used. Their exp
 
 On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="20%" class="img-responsive" alt=""> </div>
+<div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
 Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
 
-<div><img src="attention.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
 
 f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context. The support set is the set of few labeled samples. While f is an LSTM with attention. 
 
