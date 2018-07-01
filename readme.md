@@ -115,13 +115,13 @@ This year CVPR'18 had an interesting paper on few shot learning that is showing 
 
 The mapping between the activations and the parameters \phi is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset D_{large}, it will still generalize to the few labeled data D_{few}. The statistic set in this case can be the mean of activations as in:
 
-<div><img src="stats1.png" width="70%" class="img-responsive" alt=""> </div>
+<div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
 Where \bar{a_y} is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative unlike what it has been trained on in the large scale data. So they suggest using sampling between the mean of activations or one example from the data as in:
 
-<div><img src="stats2.png" width="70%" class="img-responsive" alt=""> </div>
+<div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where <img src="sy.png" width="10%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
+Where <img src="sy.png" width="5%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
 They were the first work to experiment on 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
 ### Prototypical Networks
@@ -171,3 +171,9 @@ The fundamental differences between human robot interaction and the current few 
 [8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
 [9] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
+
+[10] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).
+
+[11] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.
+
+[12] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018.
