@@ -147,12 +147,23 @@ Forward pass computes dot product between embedding of current example and weigh
 if you have multiple samples apply average on the embeddings to compute the imprinted weights
 
 ## HRI Setting:
-The fundamental differences between human robot interaction and the current few shot learning setting are: 
-1. the abundance of temporal information for the different poses of the object. 
+### Differences to Few Shot Learning Literature:
+
+The fundamental differences between human robot interaction and the current few shot learning setting that we are thinking of: 
+1. the abundance of temporal information for the different poses of the object. This has a little similarity to the work on View-Manifold learning, yet with a more realistic scenario containing illumination changes, occlusions and others.
 2. the hierarchy of category, different instances/classes within the same category, and different poses. 
-3. The open set nature of the problem, which requires the identification of unknown objects. 
+3. The open set nature of the problem, which requires the identification of unknown objects to the system. If the robot is able to identify what is unknown to it. It will be able to query for that object either on the large-scale web data or through interacting with the human as well. 
 4. Different challenges introduced by the cluttered background, the different rigid and non-rigid transformations, occlusions and illumination changes. 
-5. the continual learning of objects.
+5. the continual learning of novel objects from few labeled samples.
+
+### KUKA Innovation Challenge:
+So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=aLcw73dt_Oo"><img src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT"></a>
+</div>
+
+Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work and we had our failures during the demo of course, but it generally worked well and was able to continually learn objects that were from the audience. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
 [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
 
