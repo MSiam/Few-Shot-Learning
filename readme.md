@@ -79,16 +79,21 @@ The previous approaches does not address the different viewpoints that can be av
 
 <div><img src="cos.png" width="50%" class="img-responsive" alt=""> </div>
 
-A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D CAD Models from ShapeNet dataset to incorporate different viewpoints for the model. 
+A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
 <div align="center"><img src="view_manifold.png" width="70%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
-On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour.
+On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour. It basically tries to learn this attention kernel:
 
+<div><img src="attkernel.png" width="50%" class="img-responsive" alt=""> </div>
 
-[Other useful resouces] (https://github.com/karpathy/paper-notes/blob/master/matching_networks.md)
+Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close.
+
+<div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
+
+[Other useful resouces](https://github.com/karpathy/paper-notes/blob/master/matching_networks.md).
 
 ### MAML
 
