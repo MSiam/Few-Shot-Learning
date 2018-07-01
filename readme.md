@@ -19,7 +19,7 @@ Few Shot Learning, the ability to learn from few labeled samples, is a vital ste
 
 As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. 
 
-<img src="objects.png" class="img-responsive" alt=""> </div>
+<div><img src="objects.png" class="img-responsive" alt=""> </div>
 
 ## Few Shot Learning Literature:
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
@@ -30,7 +30,7 @@ The few shot learning is formulated as a **m shot n way** classification problem
 * Omniglot Dataset [1], the few-shot version of MNIST. It is a character recognition dataset which contains 50 alphabets, each alphabet has around 15 to 40 characters, and each character is produced by 20 drawers. 
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.
 
-![alt text](https://github.com/MSiam/My-Thoughts/blob/master/omniglot.png "HRI")
+<div><img src="omniglot.png" class="img-responsive" alt=""> </div>
 
 ### Siamese Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. One of the earliest attempts was using siamese networks by Koch et al. and formulating the few shot learning problem as a verification task. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. The distance function used to learn the similarity can be in the form of a contrastive loss, or a weighted L1 distance. In Koch et al. paper they utilized the weighted L1 distance followed by a sigmoid function and cross entropy loss . Figure .. shows the network architecture used and an unofficial keras code is provided here.
