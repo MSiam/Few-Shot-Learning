@@ -85,11 +85,15 @@ A triplet loss similar to the above but using cosine distance is used. Their exp
 
 ### Matching Networks
 
-On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour. It basically tries to learn this attention kernel:
+On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="attkernel.png" width="40%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close.
+Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
+
+<div><img src="attention.png" width="40%" class="img-responsive" alt=""> </div>
+
+f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context. The support set is the set of few labeled samples. While f is an LSTM with attention. 
 
 <div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
 
@@ -97,9 +101,16 @@ Where the possible class labels y are weighted with the a, which determines how 
 
 ### MAML
 
+Another direction in few shot learning that is away from metric based learning methods is meta learning. The MAML method [9] creates this model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
+<div><img src="maml.png" width="50%" class="img-responsive" alt=""> </div>
+
+For each sampled data points D we optimize using stochastic gradient descent and update the parameters based on this. But then a meta update is computed that sums the gradients over all tasks using the updated parameters \theta_i'. This is used to make a meta update to the parameters.
 
 ### Activations to Parameters
+
+This year CVPR had an interesting paper on few shsot learning that is showing really good results with a very intuitive idea. The method is based on learning a mapping between activations and parameters/weights. This mapping can then be used when we have new classes that have few labeled samples to get their corresponding weights to be used in the classification.
+
 
 ### Imprinted Weights
 
@@ -126,3 +137,5 @@ The fundamental differences between human robot interaction and the current few 
 [7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).
 
 [8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
+
+[9] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
