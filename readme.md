@@ -19,7 +19,7 @@ Few Shot Learning, the ability to learn from few labeled samples, is a vital ste
 
 As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. 
 
-<div><img src="objects.png" class="img-responsive" alt=""> </div>
+<div><img src="objects.png" align="middle" class="img-responsive" alt=""> </div>
 
 ## Few Shot Learning Literature:
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
@@ -31,7 +31,7 @@ The few shot learning is formulated as a **m shot n way** classification problem
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
 * In a newer work in CVPR'18 [3] instead of evaluating on the few-shot set solely, evaluating on both few-shot set and the large-scale set data on the whole ImageNet data with the 1000-way accuracy was reported.
 
-<div><img src="omniglot.png" class="img-responsive" alt=""> </div>
+<div><img src="omniglot.png" align="middle" class="img-responsive" alt=""> </div>
 
 ### Siamese and Triplet Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. 
@@ -68,7 +68,7 @@ To sum it up there are three things to think of when desiging your method :
   * Triplet Loss
   * Cross Entropy
   
- <div><img src="metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
+ <div><img src="metric_learning.png" align="middle" width="50%" class="img-responsive" alt=""> </div>
 ### Matching Networks
 
 ### MAML
