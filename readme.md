@@ -19,22 +19,27 @@ Few Shot Learning, the ability to learn from few labeled samples, is a vital ste
 
 As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. 
 
-<div><img src="objects.png" class="img-responsive" alt=""> </div>
+<div align="center"><img src="objects.png" class="img-responsive" alt=""> </div>
 
 ## Few Shot Learning Literature:
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
 
 
-## General Setup and Datasets:
+### General Setup and Datasets:
 The few shot learning is formulated as a **m shot n way** classification problem, where **m is the number of labeled samples per class**, and **n is the number of classes** to classify among. Two main datasets are used in the literature:
 * Omniglot Dataset [1], the few-shot version of MNIST. It is a character recognition dataset which contains 50 alphabets, each alphabet has around 15 to 40 characters, and each character is produced by 20 drawers. 
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
 * In a newer work in CVPR'18 [3] instead of evaluating on the few-shot set solely, evaluating on both few-shot set and the large-scale set data on the whole ImageNet data with the 1000-way accuracy was reported.
 
-<div><img src="omniglot.png" class="img-responsive" alt=""> </div>
+<div align="center"><img src="omniglot.png" class="img-responsive" alt=""> </div>
 
 ### Siamese and Triplet Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. 
+
+#### Cross Entropy Loss
+One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
+
+<div><img src="ce.png" width="40%" class="img-responsive" alt=""> </div>
 
 #### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
@@ -50,11 +55,6 @@ A better extension on the contrastive loss idea is to use a triplet network with
 
 X is the anchor sample, X+ is the positive sample, X- is the negative sample, D_w is the distance function and m is the margin. It is basically decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. Why this is better than Contrastive loss, cause ...
 
-#### Cross Entropy Loss
-One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
-
-<div><img src="ce.png" width="40%" class="img-responsive" alt=""> </div>
-
 #### Summary
 To sum it up there are three things to think of when desiging your method :
 * The base network architecture used in the siamese or triplet network.
@@ -67,6 +67,9 @@ To sum it up there are three things to think of when desiging your method :
   * Contrastive Loss
   * Triplet Loss
   * Cross Entropy
+  
+ <div align="center"><img src="metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
+ 
   
 ### Matching Networks
 
@@ -85,7 +88,6 @@ The fundamental differences between human robot interaction and the current few 
 3. The open set nature of the problem, which requires the identification of unknown objects. 
 4. Different challenges introduced by the cluttered background, the different rigid and non-rigid transformations, occlusions and illumination changes. 
 5. the continual learning of objects.
-
 
 [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
 
