@@ -45,13 +45,13 @@ Y label is 0 for similar class samples, and 1 for dissimilar. D_w is the distanc
 
 A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
- 
+ <div><img src="triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
+X is the anchor sample, X+ is the positive sample, X- is the negative sample, D_w is the distance function and m is the margin. It is basically decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. Why this is better than Contrastive loss, cause ...
 
-One of the earliest attempts was using siamese networks [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. 
-The distance function used to learn the similarity can be in the form of a contrastive loss, or a weighted L1 distance. In Koch et al. paper they utilized the weighted L1 distance followed by a sigmoid function and cross entropy loss . 
+One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by merging the embeddings from the twin network and using one fully connected layer to learn the weights, then using L1 distance function. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to have  
 
-Figure .. shows the network architecture used and an unofficial keras code is provided here.
+<div><img src="ce.png" width="50%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
