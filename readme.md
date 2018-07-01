@@ -36,14 +36,14 @@ The few shot learning is formulated as a **m shot n way** classification problem
 ### Siamese Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. 
 
-One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4].
+One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
 
 <div><img src="cl.png" width="50%" class="img-responsive" alt=""> </div>
 
-Y label is 0 for similar class samples, and 1 for dissimilar. D_w is the distance function that is euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m.
+Y label is 0 for similar class samples, and 1 for dissimilar. D_w is the distance function that is euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
 
 
-Triplet Loss [5]
+A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
  
 
