@@ -28,13 +28,27 @@ What motivated me to write on this topic was working on the KUKA innovation chal
 ## General Setup and Datasets:
 The few shot learning is formulated as a **m shot n way** classification problem, where **m is the number of labeled samples per class**, and **n is the number of classes** to classify among. Two main datasets are used in the literature:
 * Omniglot Dataset [1], the few-shot version of MNIST. It is a character recognition dataset which contains 50 alphabets, each alphabet has around 15 to 40 characters, and each character is produced by 20 drawers. 
-* Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.
+* Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
+* In a newer work in CVPR'18 [3] instead of evaluating on the few-shot set solely, evaluating on both few-shot set and the large-scale set data on the whole ImageNet data with the 1000-way accuracy was reported.
 
 <div><img src="omniglot.png" class="img-responsive" alt=""> </div>
 
 ### Siamese Networks
-Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. One of the earliest attempts was using siamese networks by Koch et al [3]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. 
+Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. 
 
+One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4].
+
+<div><img src="cl.png" class="img-responsive" alt=""> </div>
+
+Y label is 0 for similar class samples, and 1 for dissimilar. D_w is the distance function that is euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m.
+
+
+Triplet Loss [5]
+
+ 
+
+
+One of the earliest attempts was using siamese networks [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights which is then merged and the similarity between features is learned through stochastic gradient descent. 
 The distance function used to learn the similarity can be in the form of a contrastive loss, or a weighted L1 distance. In Koch et al. paper they utilized the weighted L1 distance followed by a sigmoid function and cross entropy loss . 
 
 Figure .. shows the network architecture used and an unofficial keras code is provided here.
@@ -62,5 +76,12 @@ The fundamental differences between human robot interaction and the current few 
 
 [2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
-[3] Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.
+[3] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).
+
+[4] Hadsell, Raia, Sumit Chopra, and Yann LeCun. "Dimensionality reduction by learning an invariant mapping." null. IEEE, 2006.
+
+[5] Hoffer, Elad, and Nir Ailon. "Deep metric learning using triplet network." International Workshop on Similarity-Based Pattern Recognition. Springer, Cham, 2015.
+
+
+Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.
 
