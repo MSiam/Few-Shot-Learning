@@ -71,13 +71,28 @@ To sum it up there are three things to think of when desiging your method :
   * Triplet Loss
   * Cross Entropy
 
-[Other useful resources regarding siamese networks for One shot Learning](https://hackernoon.com/one-shot-learning-with-siamese-networks-in-pytorch-8ddaab10340e).
+[Other useful resources](https://hackernoon.com/one-shot-learning-with-siamese-networks-in-pytorch-8ddaab10340e).
+
+### View-Manifold Learning
+
+The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the above but is specificaly designed to handle this [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
+
+<div><img src="cos.png" width="50%" class="img-responsive" alt=""> </div>
+
+A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D CAD Models from ShapeNet dataset to incorporate different viewpoints for the model. 
+
+<div align="center"><img src="view_manifold.png" width="70%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
+On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour.
+
+
+[Other useful resouces] (https://github.com/karpathy/paper-notes/blob/master/matching_networks.md)
+
 ### MAML
 
-### Triplet Networks
+
 
 ### Activations to Parameters
 
@@ -103,3 +118,6 @@ The fundamental differences between human robot interaction and the current few 
 
 [6] Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.
 
+[7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).
+
+[8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
