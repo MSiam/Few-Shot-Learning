@@ -89,11 +89,11 @@ On the same line of metric learning based methods, matching networks tries to le
 
 <div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two samples.
+Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two sample embeddings.
 
 <div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
 
-f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context. The support set is the set of few labeled samples. While f is an LSTM with attention. 
+f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context, where the support set is the set of few labeled samples. The test sample embedding f is based on LSTM with attention. 
 
 <div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
 
@@ -103,24 +103,67 @@ f and g are the embeddings of both the test and training samples respectively. T
 
 Another direction in few shot learning that is away from metric based learning methods is meta learning. The MAML method [9] creates this model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
-<div><img src="maml.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="maml.png" width="70%" class="img-responsive" alt=""> </div>
 
-For each sampled data points D we optimize using stochastic gradient descent and update the parameters based on this. But then a meta update is computed that sums the gradients over all tasks using the updated parameters \theta_i'. This is used to make a meta update to the parameters.
+For each sampled data points D optimize using stochastic gradient descent and update the parameters based on this \theta_i'. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters \theta_i'. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
 
 ### Activations to Parameters
 
-This year CVPR had an interesting paper on few shsot learning that is showing really good results with a very intuitive idea. The method is based on learning a mapping between activations and parameters/weights. This mapping can then be used when we have new classes that have few labeled samples to get their corresponding weights to be used in the classification.
+This year CVPR'18 had an interesting paper on few shot learning that is showing really good results with a very intuitive idea. The method is based on learning a mapping between activations and parameters/weights. This mapping can then be used when we have new classes that have few labeled samples to get their corresponding weights from the activations to produce the final classification.
 
+<div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
+
+The mapping between the activations and the parameters \phi is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset D_{large}, it will still generalize to the few labeled data D_{few}. The statistic set in this case can be the mean of activations as in:
+
+<div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
+
+Where \bar{a_y} is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative unlike what it has been trained on in the large scale data. So they suggest using sampling between the mean of activations or one example from the data as in:
+
+<div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
+
+Where <img src="sy.png" width="4%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
+They were the first work to experiment on 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
+
+### Prototypical Networks
+There exists an embedding in which pts cluster arnd one prototype, class prototype is the mean of its support set.
 
 ### Imprinted Weights
+Two setting:
+1- a query image and a support set (few labeled data) is used every time with inference.
+2- combined set of categories represented as base classes with abundant examples, and novel low shot classes. 
+
+Imprinting weights from activations while old weights are kep the same, then uses normalization on all weights
+
+Neghbourhood component analysis learns distance metric through softmax-like loss
+
+This work provides connection between softmax classifier and metric learning methods
+
+minimizing euclidean distance between pt x and its proxy p(x) == maximizing dot product (cosine similarity)
+Loss neighbourhood component analysis == loss softmax
+
+Normalization layer to ensure that output embedding (activations) unit length
+Forward pass computes dot product between embedding of current example and weights (templates) for each class
+
+if you have multiple samples apply average on the embeddings to compute the imprinted weights
 
 ## HRI Setting:
-The fundamental differences between human robot interaction and the current few shot learning setting are: 
-1. the abundance of temporal information for the different poses of the object. 
+### Differences to Few Shot Learning Literature:
+
+The fundamental differences between human robot interaction and the current few shot learning setting that we are thinking of: 
+1. the abundance of temporal information for the different poses of the object. This has a little similarity to the work on View-Manifold learning, yet with a more realistic scenario containing illumination changes, occlusions and others.
 2. the hierarchy of category, different instances/classes within the same category, and different poses. 
-3. The open set nature of the problem, which requires the identification of unknown objects. 
+3. The open set nature of the problem, which requires the identification of unknown objects to the system. If the robot is able to identify what is unknown to it. It will be able to query for that object either on the large-scale web data or through interacting with the human as well. 
 4. Different challenges introduced by the cluttered background, the different rigid and non-rigid transformations, occlusions and illumination changes. 
-5. the continual learning of objects.
+5. the continual learning of novel objects from few labeled samples.
+
+### KUKA Innovation Challenge:
+So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
+
+<iframe width="420" height="345"
+src="https://www.youtube.com/watch?v=aLcw73dt_Oo">
+</iframe>
+
+Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
 [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
 
@@ -139,3 +182,9 @@ The fundamental differences between human robot interaction and the current few 
 [8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
 [9] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
+
+[10] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).
+
+[11] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.
+
+[12] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018.
