@@ -121,7 +121,7 @@ Another direction in few shot learning that is away from metric based learning m
 
 <div><img src="maml.png" width="70%" class="img-responsive" alt=""> </div>
 
-For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on this \theta_i'. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters \theta_i'. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
+For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on <img src="theta.png" width="3%" class="img-responsive" alt="">. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters <img src="theta.png" width="3%" class="img-responsive" alt="">. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
 
 ## Activations to Parameters
 
@@ -129,7 +129,7 @@ This year CVPR'18 had an interesting paper on few shot learning, it is showing p
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters <img src="phi.png" width="2%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="7%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="7%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="phi.png" width="2%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="5%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="5%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
 <div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
