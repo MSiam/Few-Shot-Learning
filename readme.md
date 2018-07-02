@@ -56,7 +56,7 @@ A better extension on the contrastive loss idea is to use a triplet network with
 
  <div><img src="triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
-X is the anchor sample, X+ is the positive sample, X- is the negative sample, D is the distance function and m is the margin. It is basically decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
+<img src="x.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
 ### Summary
 To sum it up there are three things to think of when desiging your method :
@@ -92,7 +92,7 @@ On the same line of metric learning methods, matching networks tries to learn an
 
 <div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels y are weighted with a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two sample embeddings.
+Where the possible class labels <img src="y.png" width="3%" class="img-responsive" alt=""> are weighted with <img src="a.png" width="3%" class="img-responsive" alt="">, which determines how much two samples <img src="x_.png" width="3%" class="img-responsive" alt="">, <img src="xhat.png" width="3%" class="img-responsive" alt=""> are close. This <img src="a.png" width="3%" class="img-responsive" alt=""> is computed as the softmax of the cosine distance between the two sample embeddings.
 
 <div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
 
@@ -137,7 +137,7 @@ Where \bar{a_y} is the mean of activations, in the few labeled samples especiall
 
 <div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where <img src="sy.png" width="4%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
+Where <img src="sy.png" width="3%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="8%" class="img-responsive" alt="">:
 They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
 ## Weights imprinting
@@ -145,6 +145,7 @@ They were the first work to experiment on a 1000-way few shot recognition and re
 Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods.
 
 Imprinting weights from activations while old weights are kep the same, then uses normalization on all weights
+<div><img src="imprint.png" width="80%" class="img-responsive" alt=""> </div>
 
 Neghbourhood component analysis learns distance metric through softmax-like loss
 
@@ -173,6 +174,8 @@ So we basically worked with very simple methods for the KUKA innovation challeng
 <video class="center" src="kuka.mp4" width="640" height="480" controls preload></video>
 
 Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
+
+# References
 
 [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
 
