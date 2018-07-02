@@ -88,7 +88,7 @@ A triplet loss similar to the above but with the cosine distance is used. Their 
 
 ## Matching Networks
 
-On the same line of metric learning methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
+On the same line of metric learning methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [2]. It is based on this attention kernel:
 
 <div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
@@ -104,7 +104,7 @@ f and g are the embeddings of both the test query and the training samples respe
 
 ## MAML
 
-Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [9] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
+Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
 <div><img src="maml.png" width="70%" class="img-responsive" alt=""> </div>
 
@@ -112,7 +112,7 @@ For each sampled data points D it optimizes using stochastic gradient descent an
 
 ## Activations to Parameters
 
-This year CVPR'18 had an interesting paper on few shot learning, it is showing promising results with a rather intuitive idea. The method is based on learning a mapping between activations and parameters/weights from large-scale data. This mapping can be used when we have few labeled samples to get the corresponding weights of the classes from their activations.
+This year CVPR'18 had an interesting paper on few shot learning, it is showing promising results with a rather intuitive idea. The method is based on learning a mapping between activations and parameters/weights from large-scale data [3]. This mapping can be used when we have few labeled samples to get the corresponding weights of the classes from their activations.
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
@@ -129,10 +129,21 @@ They were the first work to experiment on a 1000-way few shot recognition and re
 
 ## Prototypical Networks
 
-There exists an embedding in which pts cluster arnd one prototype, class prototype is the mean of its support set.
+Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
+
+<div><img src="proto1.png" width="80%" class="img-responsive" alt=""> </div>
+
+After sampling the support and the query examples, the prototypes <img src="proto6.png" width="10%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="10%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
+
+Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
+<div><img src="proto3.png" width="10%" class="img-responsive" alt=""> </div>
+
+The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="10%" class="img-responsive" alt="">  is the numbmer of classes per episode , <img src="proto5.png" width="10%" class="img-responsive" alt="">  is the number of query examples.
+
 
 ## Imprinted Weights
 
+[10]
 Two setting:
 1- a query image and a support set (few labeled data) is used every time with inference.
 2- combined set of categories represented as base classes with abundant examples, and novel low shot classes. 
@@ -182,12 +193,8 @@ Before the deadline I tried so much to take a video that would be perfect with n
 
 [7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).
 
-[8] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
+[8] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
 
-[9] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
+[9] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.
 
-[10] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).
-
-[11] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.
-
-[12] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018.
+[10] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018.
