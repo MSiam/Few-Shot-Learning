@@ -95,7 +95,7 @@ Where the possible class labels y are weighted with a, which determines how much
 
 f and g are the embeddings of both the test query and the training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context, where the support set is the set of few labeled samples. The test/query sample embedding f is based on LSTM with attention. 
 
-<div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="matchnets.png" width="60%" class="img-responsive" alt=""> </div>
 
 [Other useful resouces](https://github.com/karpathy/paper-notes/blob/master/matching_networks.md).
 
@@ -159,7 +159,7 @@ The fundamental differences between human robot interaction and the current few 
 ### KUKA Innovation Challenge:
 So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
 
-<video src="kuka.mp4" width="640" height="480" controls preload></video>
+<video align="center" src="kuka.mp4" width="640" height="480" controls preload></video>
 
 Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
