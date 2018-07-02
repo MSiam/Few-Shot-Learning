@@ -137,7 +137,7 @@ Where \bar{a_y} is the mean of activations, in the few labeled samples especiall
 
 <div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where <img src="sy.png" width="4%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
+Where <img src="sy.png" width="3%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="8%" class="img-responsive" alt="">:
 They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
 ## Weights imprinting
