@@ -129,11 +129,11 @@ This year CVPR'18 had an interesting paper on few shot learning, it is showing p
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters \phi is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset D_{large}, it will still generalize to the few labeled data D_{few}. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="3%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="3%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
 <div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where \bar{a_y} is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative sample to the class, unlike what it has been trained on in the large scale (sufficient samples) data. So they suggest using sampling between the mean of activations or uniformly sampling from the examples itself as in:
+Where <img src="abar.png" width="3%" class="img-responsive" alt=""> is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative sample to the class, unlike what it has been trained on in the large scale (sufficient samples) data. So they suggest using sampling between the mean of activations or uniformly sampling from the examples itself as in:
 
 <div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
