@@ -129,7 +129,7 @@ This year CVPR'18 had an interesting paper on few shot learning, it is showing p
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters <img src="phi.png" width="2%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="5%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="5%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="4%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="4%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
 <div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
@@ -142,21 +142,9 @@ They were the first work to experiment on a 1000-way few shot recognition and re
 
 ## Weights imprinting
 
-Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods.
+Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods. It is based on computing the weights for the new classes as the output activations, while old classes weights are kept the same. It then applies normalization on all weights to ensure that output embeddings (activations) is unit length. The forward pass would be computing the dot product between the embedding of query example and the weights (templates) for each class (the imprinted weights). In case you have multiple examples per class, you would apply average on the embeddings to compute the imprinted weights of this class.
 
-Imprinting weights from activations while old weights are kep the same, then uses normalization on all weights
 <div><img src="imprint.png" width="80%" class="img-responsive" alt=""> </div>
-
-Neghbourhood component analysis learns distance metric through softmax-like loss
-
-
-minimizing euclidean distance between pt x and its proxy p(x) == maximizing dot product (cosine similarity)
-Loss neighbourhood component analysis == loss softmax
-
-Normalization layer to ensure that output embedding (activations) unit length
-Forward pass computes dot product between embedding of current example and weights (templates) for each class
-
-if you have multiple samples apply average on the embeddings to compute the imprinted weights
 
 # HRI Setting
 ## Differences to Few Shot Learning Literature
