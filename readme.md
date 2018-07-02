@@ -129,7 +129,7 @@ This year CVPR'18 had an interesting paper on few shot learning, it is showing p
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="3%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="3%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="phi.png" width="2%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="7%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="7%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
 <div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
