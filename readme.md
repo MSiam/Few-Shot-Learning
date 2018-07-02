@@ -146,6 +146,8 @@ Another interesting paper in CVPR'18 on few shot learning is the weight imprinti
 
 <div><img src="imprint.png" width="80%" class="img-responsive" alt=""> </div>
 
+***
+
 # HRI Setting
 ## Differences to Few Shot Learning Literature
 
@@ -163,9 +165,11 @@ So we basically worked with very simple methods for the KUKA innovation challeng
 
 Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
+***
+
 # References
 
-[1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
+<dd>[1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.<\dd>
 
 [2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
