@@ -39,7 +39,7 @@ Metric learning methods have the advantage that they rapidly learn novel concept
 #### Cross Entropy Loss
 One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
 
-<div><img src="ce.png" width="40%" class="img-responsive" alt=""> </div>
+<div><img src="ce.png" width="30%" class="img-responsive" alt=""> </div>
 
 #### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
