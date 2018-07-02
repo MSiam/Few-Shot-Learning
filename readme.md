@@ -169,22 +169,22 @@ Before the deadline I tried so much to take a video that would be perfect with n
 
 # References
 
-<span style="font-size:0.8em"> [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.
+<span style="font-size:0.8em"> [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.</span>
 
-[2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
+<span style="font-size:0.8em">[2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.</span>
 
-[3] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).
+<span style="font-size:0.8em">[3] Qiao, Siyuan, et al. "Few-shot image recognition by predicting parameters from activations." CoRR, abs/1706.03466 1 (2017).</span>
 
-[4] Hadsell, Raia, Sumit Chopra, and Yann LeCun. "Dimensionality reduction by learning an invariant mapping." null. IEEE, 2006.
+<span style="font-size:0.8em">[4] Hadsell, Raia, Sumit Chopra, and Yann LeCun. "Dimensionality reduction by learning an invariant mapping." null. IEEE, 2006.</span>
 
-[5] Hoffer, Elad, and Nir Ailon. "Deep metric learning using triplet network." International Workshop on Similarity-Based Pattern Recognition. Springer, Cham, 2015.
+<span style="font-size:0.8em">[5] Hoffer, Elad, and Nir Ailon. "Deep metric learning using triplet network." International Workshop on Similarity-Based Pattern Recognition. Springer, Cham, 2015.</span>
 
-[6] Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.
+<span style="font-size:0.8em">[6] Koch, Gregory, Richard Zemel, and Ruslan Salakhutdinov. "Siamese neural networks for one-shot image recognition." ICML Deep Learning Workshop. Vol. 2. 2015.</span>
 
-[7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).
+<span style="font-size:0.8em">[7] Lin, Xingyu, et al. "Transfer of view-manifold learning to similarity perception of novel objects." arXiv preprint arXiv:1704.00033 (2017).</span>
 
-[8] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).
+<span style="font-size:0.8em">[8] Finn, Chelsea, Pieter Abbeel, and Sergey Levine. "Model-agnostic meta-learning for fast adaptation of deep networks." arXiv preprint arXiv:1703.03400 (2017).</span>
 
-[9] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.
+<span style="font-size:0.8em">[9] Snell, Jake, Kevin Swersky, and Richard Zemel. "Prototypical networks for few-shot learning." Advances in Neural Information Processing Systems. 2017.</span>
 
-[10] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018. </span>
+<span style="font-size:0.8em">[10] Qi, Hang, Matthew Brown, and David G. Lowe. "Low-Shot Learning With Imprinted Weights." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018. </span>
