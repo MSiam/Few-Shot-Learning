@@ -24,11 +24,11 @@ As humans we can hold the object and check it from different viewpoints and try 
 
 <div align="center"><img src="objects.png" width="60%" class="img-responsive" alt=""> </div>
 
-# Few Shot Learning Literature:
+# Few Shot Learning Literature
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
 
 
-## General Setup and Datasets:
+## General Setup and Datasets
 The few shot learning is formulated as a **m shot n way** classification problem, where **m is the number of labeled samples per class**, and **n is the number of classes** to classify among. Two main datasets are used in the literature:
 * Omniglot Dataset [1], the few-shot version of MNIST. It is a character recognition dataset which contains 50 alphabets, each alphabet has around 15 to 40 characters, and each character is produced by 20 drawers. 
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
@@ -102,6 +102,19 @@ f and g are the embeddings of both the test query and the training samples respe
 
 [Other useful resouces](https://github.com/karpathy/paper-notes/blob/master/matching_networks.md).
 
+## Prototypical Networks
+
+Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
+
+<div><img src="proto1.png" width="90%" class="img-responsive" alt=""> </div>
+
+After sampling the support and the query examples, the prototypes <img src="proto6.png" width="3%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="3%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
+
+Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
+<div><img src="proto3.png" width="50%" class="img-responsive" alt=""> </div>
+
+The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="3%" class="img-responsive" alt="">  is the numbmer of classes per episode , <img src="proto5.png" width="3%" class="img-responsive" alt="">  is the number of query examples.
+
 ## MAML
 
 Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
@@ -127,32 +140,14 @@ Where \bar{a_y} is the mean of activations, in the few labeled samples especiall
 Where <img src="sy.png" width="4%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
 They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
-## Prototypical Networks
+## Weights imprinting
 
-Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
-
-<div><img src="proto1.png" width="100%" class="img-responsive" alt=""> </div>
-
-After sampling the support and the query examples, the prototypes <img src="proto6.png" width="2%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="2%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
-
-Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
-<div><img src="proto3.png" width="50%" class="img-responsive" alt=""> </div>
-
-The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="2%" class="img-responsive" alt="">  is the numbmer of classes per episode , <img src="proto5.png" width="2%" class="img-responsive" alt="">  is the number of query examples.
-
-
-## Imprinted Weights
-
-[10]
-Two setting:
-1- a query image and a support set (few labeled data) is used every time with inference.
-2- combined set of categories represented as base classes with abundant examples, and novel low shot classes. 
+Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods.
 
 Imprinting weights from activations while old weights are kep the same, then uses normalization on all weights
 
 Neghbourhood component analysis learns distance metric through softmax-like loss
 
-This work provides connection between softmax classifier and metric learning methods
 
 minimizing euclidean distance between pt x and its proxy p(x) == maximizing dot product (cosine similarity)
 Loss neighbourhood component analysis == loss softmax
@@ -162,8 +157,8 @@ Forward pass computes dot product between embedding of current example and weigh
 
 if you have multiple samples apply average on the embeddings to compute the imprinted weights
 
-# HRI Setting:
-## Differences to Few Shot Learning Literature:
+# HRI Setting
+## Differences to Few Shot Learning Literature
 
 The fundamental differences between human robot interaction and the current few shot learning setting that we are thinking of: 
 1. the abundance of **temporal information for the different poses of the object**. This has a little similarity to the work on View-Manifold learning, yet with a more realistic scenario containing illumination changes, occlusions and others.
@@ -172,7 +167,7 @@ The fundamental differences between human robot interaction and the current few 
 4. Different challenges introduced by the **cluttered background, the different rigid and non-rigid transformations, occlusions and illumination changes**. 
 5. the **continual learning** of novel objects from **few labeled samples**.
 
-## KUKA Innovation Challenge:
+## KUKA Innovation Challenge
 So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
 
 <video class="center" src="kuka.mp4" width="640" height="480" controls preload></video>
