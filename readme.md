@@ -169,7 +169,7 @@ Before the deadline I tried so much to take a video that would be perfect with n
 
 # References
 
-<dd>[1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011.<\dd>
+<span style="font-size:0.8em"> [1] Lake, Brenden, et al. "One shot learning of simple visual concepts." Proceedings of the Annual Meeting of the Cognitive Science Society. Vol. 33. No. 33. 2011. </span>
 
 [2] Vinyals, Oriol, et al. "Matching networks for one shot learning." Advances in Neural Information Processing Systems. 2016.
 
