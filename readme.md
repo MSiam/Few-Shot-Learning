@@ -19,7 +19,7 @@ Few Shot Learning, the ability to learn from few labeled samples, is a vital ste
 
 As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. A further step is combine that with the ability to learn from large-scale web data about that object.
 
-<div align="center"><img src="objects.png" width="80%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="objects.png" width="60%" class="img-responsive" alt=""> </div>
 
 ## Few Shot Learning Literature:
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
@@ -39,7 +39,7 @@ Metric learning methods have the advantage that they rapidly learn novel concept
 #### Cross Entropy Loss
 One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
 
-<div><img src="ce.png" width="30%" class="img-responsive" alt=""> </div>
+<div><img src="ce.png" width="40%" class="img-responsive" alt=""> </div>
 
 #### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
@@ -159,7 +159,7 @@ The fundamental differences between human robot interaction and the current few 
 ### KUKA Innovation Challenge:
 So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
 
-<video align="center" src="kuka.mp4" width="640" height="480" controls preload></video>
+<video class="center" src="kuka.mp4" width="640" height="480" controls preload></video>
 
 Before the deadline I tried so much to take a video that would be perfect with no mistakes, but funny enough we ended up not using the video. We just had to make the demo work as much as we can and even if it had its failures, but it generally worked well and was able to continually learn objects that were from the audience there. It was a good start to understand the problem more anyway, and see how far we are from getting robots <3 to our homes :(.
 
