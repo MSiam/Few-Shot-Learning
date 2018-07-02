@@ -142,7 +142,7 @@ They were the first work to experiment on a 1000-way few shot recognition and re
 
 ## Weights imprinting
 
-Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods. It is based on computing the weights for the new classes as the output activations, while old classes weights are kept the same. It then applies normalization on all weights to ensure that output embeddings (activations) is unit length. The forward pass would be computing the dot product between the embedding of query example and the weights (templates) for each class (the imprinted weights). In case you have multiple examples per class, you would apply average on the embeddings to compute the imprinted weights of this class.
+Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods. It is based on computing the weights for the new classes as the output activations, while old classes weights are kept the same, followed by normalization. The forward pass would then be computing the dot product between the embedding of the query example and the weights (templates) for each class (the imprinted weights). In case you have multiple examples per class, you would apply average on the embeddings to compute the imprinted weights of this class.
 
 <div><img src="imprint.png" width="80%" class="img-responsive" alt=""> </div>
 
