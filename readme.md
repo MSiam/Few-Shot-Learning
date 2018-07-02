@@ -2,10 +2,10 @@
 
 * Few Shot Learning Literature
   * General Setup and Datasets
-  * Siamese Networks for One Shot Learning 
+  * Siamese and Triplet Networks
   * Matching Networks 
   * Meta-Agnostic Model Learning 
-  * Triplet Networks 
+  * View-Manifold Learning
   * Prototypical Networks 
   * Activations to Parameters 
   * Weight Imprinting 
@@ -13,11 +13,11 @@
   * Differences to Few Shot Literature 
   * KUKA Innovation Challenge 
 
-# Few Sot Learning using HRI
+# Few Shot Learning using Human Robot Interaction
 
 Few Shot Learning, the ability to learn from few labeled samples, is a vital step in robot manipulation. In order for robots to operate in dynamic and unstructured environments, they need to learn novel objects on the fly from few samples. The current object recognition methods using convolutional networks are based on supervised learning with large-scale datasets such as ImageNet, with hundreds or thousands labeled examples. However, even with large-scale datasets they remain limited in multiple aspects, not all objects in our lives are within the 1000 labels provided in ImageNet. 
 
-As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. 
+As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. A further step is combine that with the ability to learn from large-scale web data about that object.
 
 <div align="center"><img src="objects.png" class="img-responsive" alt=""> </div>
 
@@ -46,14 +46,14 @@ One approach is to learn a mapping from inputs to vectors in an embedding space 
 
 <div><img src="cl.png" width="50%" class="img-responsive" alt=""> </div>
 
-Y label is 0 for similar class samples, and 1 for dissimilar. D_w is the distance function that is euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
+Y label is 0 for similar class samples, 1 for dissimilar, and D is the euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
 
 #### Triplet Loss
 A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
  <div><img src="triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
-X is the anchor sample, X+ is the positive sample, X- is the negative sample, D_w is the distance function and m is the margin. It is basically decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. Why this is better than Contrastive loss, cause ...
+X is the anchor sample, X+ is the positive sample, X- is the negative sample, D is the distance function and m is the margin. It is basically decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
 #### Summary
 To sum it up there are three things to think of when desiging your method :
@@ -75,25 +75,25 @@ To sum it up there are three things to think of when desiging your method :
 
 ### View-Manifold Learning
 
-The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the above but is specificaly designed to handle this [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
+The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the triplet network above but is specificaly designed to handle the learning of different views is [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
 
 <div><img src="cos.png" width="45%" class="img-responsive" alt=""> </div>
 
-A triplet loss similar to the above but using cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
+A triplet loss similar to the above but with the cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
 <div align="center"><img src="view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
 
 ### Matching Networks
 
-On the same line of metric learning based methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
+On the same line of metric learning methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [8]. It is based on this attention kernel:
 
 <div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels y are weighted with the a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two sample embeddings.
+Where the possible class labels y are weighted with a, which determines how much two samples x, x^hat are close. This a is computed as the softmax of the cosine distance between the two sample embeddings.
 
 <div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
 
-f and g are the embeddings of both the test and training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context, where the support set is the set of few labeled samples. The test sample embedding f is based on LSTM with attention. 
+f and g are the embeddings of both the test query and the training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context, where the support set is the set of few labeled samples. The test/query sample embedding f is based on LSTM with attention. 
 
 <div align="center"><img src="matchnets.png" width="50%" class="img-responsive" alt=""> </div>
 
@@ -101,15 +101,15 @@ f and g are the embeddings of both the test and training samples respectively. T
 
 ### MAML
 
-Another direction in few shot learning that is away from metric based learning methods is meta learning. The MAML method [9] creates this model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
+Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [9] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
 <div><img src="maml.png" width="70%" class="img-responsive" alt=""> </div>
 
-For each sampled data points D optimize using stochastic gradient descent and update the parameters based on this \theta_i'. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters \theta_i'. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
+For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on this \theta_i'. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters \theta_i'. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
 
 ### Activations to Parameters
 
-This year CVPR'18 had an interesting paper on few shot learning that is showing really good results with a very intuitive idea. The method is based on learning a mapping between activations and parameters/weights. This mapping can then be used when we have new classes that have few labeled samples to get their corresponding weights from the activations to produce the final classification.
+This year CVPR'18 had an interesting paper on few shot learning, it is showing promising results with a rather intuitive idea. The method is based on learning a mapping between activations and parameters/weights from large-scale data. This mapping can be used when we have few labeled samples to get the corresponding weights of the classes from their activations.
 
 <div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
@@ -117,12 +117,12 @@ The mapping between the activations and the parameters \phi is based on the acti
 
 <div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where \bar{a_y} is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative unlike what it has been trained on in the large scale data. So they suggest using sampling between the mean of activations or one example from the data as in:
+Where \bar{a_y} is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative sample to the class, unlike what it has been trained on in the large scale (sufficient samples) data. So they suggest using sampling between the mean of activations or uniformly sampling from the examples itself as in:
 
 <div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
 Where <img src="sy.png" width="4%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="10%" class="img-responsive" alt="">:
-They were the first work to experiment on 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
+They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
 ### Prototypical Networks
 There exists an embedding in which pts cluster arnd one prototype, class prototype is the mean of its support set.
