@@ -131,14 +131,14 @@ They were the first work to experiment on a 1000-way few shot recognition and re
 
 Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
 
-<div><img src="proto1.png" width="80%" class="img-responsive" alt=""> </div>
+<div><img src="proto1.png" width="100%" class="img-responsive" alt=""> </div>
 
-After sampling the support and the query examples, the prototypes <img src="proto6.png" width="10%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="10%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
+After sampling the support and the query examples, the prototypes <img src="proto6.png" width="4%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="4%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
 
 Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
-<div><img src="proto3.png" width="10%" class="img-responsive" alt=""> </div>
+<div><img src="proto3.png" width="50%" class="img-responsive" alt=""> </div>
 
-The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="10%" class="img-responsive" alt="">  is the numbmer of classes per episode , <img src="proto5.png" width="10%" class="img-responsive" alt="">  is the number of query examples.
+The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="4%" class="img-responsive" alt="">  is the numbmer of classes per episode , <img src="proto5.png" width="4%" class="img-responsive" alt="">  is the number of query examples.
 
 
 ## Imprinted Weights
