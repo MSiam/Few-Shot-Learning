@@ -48,7 +48,7 @@ One of the earliest attempts that was designed mainly for few shot learning usin
 ### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
 
-<div><img src="images/ocl.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="images/cl.png" width="50%" class="img-responsive" alt=""> </div>
 
 Y label is 0 for similar class samples, 1 for dissimilar, and D is the euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
 
@@ -57,7 +57,7 @@ A better extension on the contrastive loss idea is to use a triplet network with
 
  <div><img src="images/triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
-<img src="images/x.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="images/xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
+<img src="images/x.png" width="2%" class="img-responsive" alt=""> is the anchor sample, <img src="images/xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
 ### Summary
 To sum it up there are three things to think of when desiging your method :
@@ -109,7 +109,7 @@ Another work related to metric learning methods is prototypical networks [9]. It
 
 <div><img src="images/proto1.png" width="90%" class="img-responsive" alt=""> </div>
 
-After sampling the support and the query examples, the prototypes <img src="proto6.png" width="3%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="3%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
+After sampling the support and the query examples, the prototypes <img src="images/proto6.png" width="3%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="images/proto2.png" width="3%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
 
 Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
 <div><img src="images/proto3.png" width="50%" class="img-responsive" alt=""> </div>
@@ -130,7 +130,7 @@ This year CVPR'18 had an interesting paper on few shot learning, it is showing p
 
 <div align="center"><img src="images/act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="images/dlarge.png" width="4%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="4%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="images/phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="images/dlarge.png" width="4%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="images/dfew.png" width="4%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
 <div><img src="images/stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
