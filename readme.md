@@ -1,4 +1,6 @@
-# Table of Contents
+# Few Shot Learning using HRI
+
+## Table of Contents
 
 * Few Shot Learning Literature
   * General Setup and Datasets
@@ -16,7 +18,6 @@
   * Differences to Few Shot Literature 
   * KUKA Innovation Challenge 
 
-# Few Shot Learning using HRI
 
 Few Shot Learning, the ability to learn from few labeled samples, is a vital step in robot manipulation. In order for robots to operate in dynamic and unstructured environments, they need to learn novel objects on the fly from few samples. The current object recognition methods using convolutional networks are based on supervised learning with large-scale datasets such as ImageNet, with hundreds or thousands labeled examples. However, even with large-scale datasets they remain limited in multiple aspects, not all objects in our lives are within the 1000 labels provided in ImageNet. 
 
