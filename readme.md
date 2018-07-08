@@ -35,7 +35,7 @@ The few shot learning is formulated as a **m shot n way** classification problem
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
 * In a newer work in CVPR'18 [3] instead of evaluating on the few-shot set solely, evaluating on both few-shot set and the large-scale set data on the whole ImageNet data with the 1000-way accuracy was reported.
 
-<div align="center"><img src="images/oomniglot.png" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/omniglot.png" class="img-responsive" alt=""> </div>
 
 ## Siamese and Triplet Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. A siamese network consists of two twin networks with shared weights, similarly a triplet network contains three copies of the network with shared weights. We are going to discuss the different loss functions used to train these:
@@ -43,7 +43,7 @@ Metric learning methods have the advantage that they rapidly learn novel concept
 ### Cross Entropy Loss
 One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network is used and a weighted L1 distance function is learned between their embeddings. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
 
-<div><img src="images/oce.png" width="40%" class="img-responsive" alt=""> </div>
+<div><img src="images/ce.png" width="40%" class="img-responsive" alt=""> </div>
 
 ### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
@@ -55,14 +55,14 @@ Y label is 0 for similar class samples, 1 for dissimilar, and D is the euclidean
 ### Triplet Loss
 A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
- <div><img src="images/otriplet.png" width="50%" class="img-responsive" alt=""> </div>
+ <div><img src="images/triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
-<img src="images/ox.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="images/oxpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/oxneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
+<img src="images/x.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="images/xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
 ### Summary
 To sum it up there are three things to think of when desiging your method :
 
-<div align="center"><img src="images/ometric_learning.png" width="50%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
 
 * The base network architecture used in the siamese or triplet network.
 * The distance function applied on the output embeddings:
@@ -81,25 +81,25 @@ To sum it up there are three things to think of when desiging your method :
 
 The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the triplet network above but is specificaly designed to handle the learning of different views is [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
 
-<div><img src="cos.png" width="45%" class="img-responsive" alt=""> </div>
+<div><img src="images/cos.png" width="45%" class="img-responsive" alt=""> </div>
 
 A triplet loss similar to the above but with the cosine distance is used. Their experiments are done on 3D Models from ShapeNet dataset to incorporate different viewpoints for the learned objects. 
 
-<div align="center"><img src="view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
 
 ## Matching Networks
 
 On the same line of metric learning methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [2]. It is based on this attention kernel:
 
-<div><img src="attkernel.png" width="25%" class="img-responsive" alt=""> </div>
+<div><img src="images/attkernel.png" width="25%" class="img-responsive" alt=""> </div>
 
-Where the possible class labels <img src="y.png" width="3%" class="img-responsive" alt=""> are weighted with <img src="a.png" width="3%" class="img-responsive" alt="">, which determines how much two samples <img src="x_.png" width="3%" class="img-responsive" alt="">, <img src="xhat.png" width="3%" class="img-responsive" alt=""> are close. This <img src="a.png" width="3%" class="img-responsive" alt=""> is computed as the softmax of the cosine distance between the two sample embeddings.
+Where the possible class labels <img src="images/y.png" width="3%" class="img-responsive" alt=""> are weighted with <img src="images/a.png" width="3%" class="img-responsive" alt="">, which determines how much two samples <img src="images/x_.png" width="3%" class="img-responsive" alt="">, <img src="images/xhat.png" width="3%" class="img-responsive" alt=""> are close. This <img src="images/a.png" width="3%" class="img-responsive" alt=""> is computed as the softmax of the cosine distance between the two sample embeddings.
 
-<div><img src="attention.png" width="60%" class="img-responsive" alt=""> </div>
+<div><img src="images/attention.png" width="60%" class="img-responsive" alt=""> </div>
 
 f and g are the embeddings of both the test query and the training samples respectively. The training samples embedding is based on a bidirectional LSTM that learns the embedding in the support set context, where the support set is the set of few labeled samples. The test/query sample embedding f is based on LSTM with attention. 
 
-<div align="center"><img src="matchnets.png" width="60%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/matchnets.png" width="60%" class="img-responsive" alt=""> </div>
 
 [Other useful resouces](https://github.com/karpathy/paper-notes/blob/master/matching_networks.md).
 
@@ -107,45 +107,45 @@ f and g are the embeddings of both the test query and the training samples respe
 
 Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
 
-<div><img src="proto1.png" width="90%" class="img-responsive" alt=""> </div>
+<div><img src="images/proto1.png" width="90%" class="img-responsive" alt=""> </div>
 
 After sampling the support and the query examples, the prototypes <img src="proto6.png" width="3%" class="img-responsive" alt=""> are computed as the mean of the embeddings <img src="proto2.png" width="3%" class="img-responsive" alt=""> for the support set, i.e. the few labeled samples. 
 
 Then the probability for a query point x to belong to class k is equal to the softmax over the distances to the prototypes:
-<div><img src="proto3.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="images/proto3.png" width="50%" class="img-responsive" alt=""> </div>
 
-The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="proto4.png" width="3%" class="img-responsive" alt="">  is the number of classes per episode , <img src="proto5.png" width="3%" class="img-responsive" alt="">  is the number of query examples.
+The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="images/proto4.png" width="3%" class="img-responsive" alt="">  is the number of classes per episode , <img src="images/proto5.png" width="3%" class="img-responsive" alt="">  is the number of query examples.
 
 ## MAML
 
 Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
-<div><img src="maml.png" width="70%" class="img-responsive" alt=""> </div>
+<div><img src="images/maml.png" width="70%" class="img-responsive" alt=""> </div>
 
-For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on <img src="theta.png" width="3%" class="img-responsive" alt="">. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters <img src="theta.png" width="3%" class="img-responsive" alt="">. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
+For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on <img src="images/theta.png" width="3%" class="img-responsive" alt="">. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters <img src="images/theta.png" width="3%" class="img-responsive" alt="">. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
 
 ## Activations to Parameters
 
 This year CVPR'18 had an interesting paper on few shot learning, it is showing promising results with a rather intuitive idea. The method is based on learning a mapping between activations and parameters/weights from large-scale data [3]. This mapping can be used when we have few labeled samples to get the corresponding weights of the classes from their activations.
 
-<div align="center"><img src="act2params.png" width="100%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/act2params.png" width="100%" class="img-responsive" alt=""> </div>
 
-The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="dlarge.png" width="4%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="4%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
+The mapping between the activations and the parameters <img src="phi.png" width="3%" class="img-responsive" alt="">  is based on the activations statistic set, it acts as a category agnostic parameter predictor. The hope is that if it is trained on a large scale dataset <img src="images/dlarge.png" width="4%" class="img-responsive" alt="">, it will still generalize to the few labeled data <img src="dfew.png" width="4%" class="img-responsive" alt="">. The statistic set in this case can be the mean of activations as in:
 
-<div><img src="stats1.png" width="80%" class="img-responsive" alt=""> </div>
+<div><img src="images/stats1.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where <img src="abar.png" width="3%" class="img-responsive" alt=""> is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative sample to the class, unlike what it has been trained on in the large scale (sufficient samples) data. So they suggest using sampling between the mean of activations or uniformly sampling from the examples itself as in:
+Where <img src="images/abar.png" width="3%" class="img-responsive" alt=""> is the mean of activations, in the few labeled samples especially in the one-shot setting it could end up using one labeled sample as the statistic set. This is definitely not a representative sample to the class, unlike what it has been trained on in the large scale (sufficient samples) data. So they suggest using sampling between the mean of activations or uniformly sampling from the examples itself as in:
 
-<div><img src="stats2.png" width="80%" class="img-responsive" alt=""> </div>
+<div><img src="images/stats2.png" width="80%" class="img-responsive" alt=""> </div>
 
-Where <img src="sy.png" width="3%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="union.png" width="8%" class="img-responsive" alt="">:
+Where <img src="images/sy.png" width="3%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="images/union.png" width="8%" class="img-responsive" alt="">:
 They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
 ## Weights imprinting
 
 Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods. It is based on computing the weights for the new classes as the output activations, while old classes weights are kept the same, followed by normalization. The forward pass would then be computing the dot product between the embedding of the query example and the weights (templates) for each class (the imprinted weights). In case you have multiple examples per class, you would apply average on the embeddings to compute the imprinted weights of this class.
 
-<div><img src="imprint.png" width="80%" class="img-responsive" alt=""> </div>
+<div><img src="images/imprint.png" width="80%" class="img-responsive" alt=""> </div>
 
 ***
 
