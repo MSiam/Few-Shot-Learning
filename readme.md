@@ -23,7 +23,7 @@ Few Shot Learning, the ability to learn from few labeled samples, is a vital ste
 
 As humans we can hold the object and check it from different viewpoints and try to interact with it to learn more about the object. Thus the robot should be able to teach itself from the few samples for the different object viewpoints. If we are aiming as well at human centered artificial intelligence, a natural step is to teach robots about their environment through human robot interaction. A human teacher can show the object with different poses and verbally instruct the robot on what it is and how it can be used. A further step is combine that with the ability to learn from large-scale web data about that object.
 
-<div align="center"><img src="objects.png" width="60%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/objects.png" width="60%" class="img-responsive" alt=""> </div>
 
 # Few Shot Learning Literature
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
@@ -35,34 +35,34 @@ The few shot learning is formulated as a **m shot n way** classification problem
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
 * In a newer work in CVPR'18 [3] instead of evaluating on the few-shot set solely, evaluating on both few-shot set and the large-scale set data on the whole ImageNet data with the 1000-way accuracy was reported.
 
-<div align="center"><img src="omniglot.png" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/oomniglot.png" class="img-responsive" alt=""> </div>
 
 ## Siamese and Triplet Networks
-Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. 
+Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. A siamese network consists of two twin networks with shared weights, similarly a triplet network contains three copies of the network with shared weights. We are going to discuss the different loss functions used to train these:
 
 ### Cross Entropy Loss
-One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network consists of two twin networks with shared weights, and a weighted L1 distance function is learned. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
+One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network is used and a weighted L1 distance function is learned between their embeddings. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
 
-<div><img src="ce.png" width="40%" class="img-responsive" alt=""> </div>
+<div><img src="images/oce.png" width="40%" class="img-responsive" alt=""> </div>
 
 ### Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
 
-<div><img src="cl.png" width="50%" class="img-responsive" alt=""> </div>
+<div><img src="images/ocl.png" width="50%" class="img-responsive" alt=""> </div>
 
 Y label is 0 for similar class samples, 1 for dissimilar, and D is the euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
 
 ### Triplet Loss
 A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
- <div><img src="triplet.png" width="50%" class="img-responsive" alt=""> </div>
+ <div><img src="images/otriplet.png" width="50%" class="img-responsive" alt=""> </div>
 
-<img src="x.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
+<img src="images/ox.png" width="3%" class="img-responsive" alt=""> is the anchor sample, <img src="images/oxpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/oxneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
 ### Summary
 To sum it up there are three things to think of when desiging your method :
 
-<div align="center"><img src="metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
+<div align="center"><img src="images/ometric_learning.png" width="50%" class="img-responsive" alt=""> </div>
 
 * The base network architecture used in the siamese or triplet network.
 * The distance function applied on the output embeddings:
