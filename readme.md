@@ -25,11 +25,11 @@ As humans we can hold the object and check it from different viewpoints and try 
 
 <div align="center"><img src="images/objects.png" width="60%" class="img-responsive" alt=""> </div>
 
-# Few Shot Learning Literature
+# 1. Few Shot Learning Literature
 What motivated me to write on this topic was working on the KUKA innovation challenge, I was part of team Alberta that were in the 5 finalists. It turned out to be an exciting way of understanding the problem. While surveying and reading papers can give you the understanding of what the literature are working on. However, some new problems from working on the demo popped up that we realized are still lacking from the literature and my intention is to share these. 
 
 
-## General Setup and Datasets
+## 1.1 General Setup and Datasets
 The few shot learning is formulated as a **m shot n way** classification problem, where **m is the number of labeled samples per class**, and **n is the number of classes** to classify among. Two main datasets are used in the literature:
 * Omniglot Dataset [1], the few-shot version of MNIST. It is a character recognition dataset which contains 50 alphabets, each alphabet has around 15 to 40 characters, and each character is produced by 20 drawers. 
 * Mini ImageNet dataset [2] on the other hand is a more realistic setting. 100 random classes from ImageNet are chose, with 80 for training and 20 for testing.  
@@ -37,29 +37,29 @@ The few shot learning is formulated as a **m shot n way** classification problem
 
 <div align="center"><img src="images/omniglot.png" class="img-responsive" alt=""> </div>
 
-## Siamese and Triplet Networks
+## 1.2 Siamese and Triplet Networks
 Metric learning methods have the advantage that they rapidly learn novel concepts without retraining. A siamese network consists of two twin networks with shared weights, similarly a triplet network contains three copies of the network with shared weights. We are going to discuss the different loss functions used to train these:
 
-### Cross Entropy Loss
+### 1.2.1 Cross Entropy Loss
 One of the earliest attempts that was designed mainly for few shot learning using siamese networks was by Koch [6]. It formulated the few shot learning problem as a **verification task**. A siamese network is used and a weighted L1 distance function is learned between their embeddings. This is done by applying L1 distance on the output embeddings then adding one fully connected layer to learn the weighted distance. The loss function used in the paper is a regularized cross entropy, where the main aim is to drive similar samples to predict 1, and 0 otherwise.
 
 <div><img src="images/ce.png" width="40%" class="img-responsive" alt=""> </div>
 
-### Contrastive Loss
+### 1.2.2 Contrastive Loss
 One approach is to learn a mapping from inputs to vectors in an embedding space where the inputs of the same class are closer than those of different classes. Once the mapping is learned, at test time a nearest neighbors method can be used for classification for new classes that are unseen. A siamese network is trained with the output features fed to a Contrastive Loss [4]:
 
 <div><img src="images/cl.png" width="50%" class="img-responsive" alt=""> </div>
 
 Y label is 0 for similar class samples, 1 for dissimilar, and D is the euclidean distance. So the loss will decrease the distance D when the samples are from the same class, on the other hand when they are dissimilar it will try to increase D with a certain margin m. The margin purpose is to neglect samples that have larger distance than m, since we only want to focus on dissimilar samples that appear to be close.
 
-### Triplet Loss
+### 1.2.3 Triplet Loss
 A better extension on the contrastive loss idea is to use a triplet network with triplet loss [5]. The triplet network inspiring from the siamese networks will have three copies of the network with shared weights. The input contains an anchor sample, a positive sample and a negative sample. The three output embeddings are then fed to the triplet loss [5]:
 
  <div><img src="images/triplet.png" width="50%" class="img-responsive" alt=""> </div>
 
 <img src="images/x.png" width="2%" class="img-responsive" alt=""> is the anchor sample, <img src="images/xpos.png" width="3%" class="img-responsive" alt=""> is the positive sample, <img src="images/xneg.png" width="3%" class="img-responsive" alt=""> is the negative sample, D is the distance function and m is the margin. The loss is decreasing the distance between the anchor and its positive sample while at the same time increasing its distance to the negative sample. 
 
-### Summary
+### 1.2.4 Summary
 To sum it up there are three things to think of when desiging your method :
 
 <div align="center"><img src="images/metric_learning.png" width="50%" class="img-responsive" alt=""> </div>
@@ -77,7 +77,7 @@ To sum it up there are three things to think of when desiging your method :
 
 [Other useful resources](https://hackernoon.com/one-shot-learning-with-siamese-networks-in-pytorch-8ddaab10340e).
 
-## View-Manifold Learning
+## 1.3 View-Manifold Learning
 
 The previous approaches does not address the different viewpoints that can be available for the novel objects being learned. However in HRI setting you have the different viewpoints for the learned objects available. A very similar approach to the triplet network above but is specificaly designed to handle the learning of different views is [7]. They design a triplet network, with a cosine distance function between X1 and X2 vectors as:
 
@@ -87,7 +87,7 @@ A triplet loss similar to the above but with the cosine distance is used. Their 
 
 <div align="center"><img src="images/view_manifold.png" width="80%" class="img-responsive" alt=""> </div>
 
-## Matching Networks
+## 1.4 Matching Networks
 
 On the same line of metric learning methods, matching networks tries to learn an end-to-end differentiable nearest neighbour [2]. It is based on this attention kernel:
 
@@ -103,7 +103,7 @@ f and g are the embeddings of both the test query and the training samples respe
 
 [Other useful resouces](https://github.com/karpathy/paper-notes/blob/master/matching_networks.md).
 
-## Prototypical Networks
+## 1.5 Prototypical Networks
 
 Another work related to metric learning methods is prototypical networks [9]. It is based on the assumption that there exists an embedding in which points cluster around one prototype. The algorithm used for training is as follows:
 
@@ -116,7 +116,7 @@ Then the probability for a query point x to belong to class k is equal to the so
 
 The loss is computed then as the negative log likelihood as shown in the algorithm, where <img src="images/proto4.png" width="3%" class="img-responsive" alt="">  is the number of classes per episode , <img src="images/proto5.png" width="3%" class="img-responsive" alt="">  is the number of query examples.
 
-## MAML
+## 1.6 MAML
 
 Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
@@ -124,7 +124,7 @@ Another direction in few shot learning that is away from metric based learning m
 
 For each sampled data points D it optimizes using stochastic gradient descent and updates the parameters based on <img src="images/theta.png" width="3%" class="img-responsive" alt="">. Then a meta update is computed that sums the gradients over all tasks, note that it is using the updated parameters <img src="images/theta.png" width="3%" class="img-responsive" alt="">. This is used to make a meta update to the parameters, and ensure that the model converges to a state where it is able to perform well on all tasks.
 
-## Activations to Parameters
+## 1.7 Activations to Parameters
 
 This year CVPR'18 had an interesting paper on few shot learning, it is showing promising results with a rather intuitive idea. The method is based on learning a mapping between activations and parameters/weights from large-scale data [3]. This mapping can be used when we have few labeled samples to get the corresponding weights of the classes from their activations.
 
@@ -141,7 +141,7 @@ Where <img src="images/abar.png" width="3%" class="img-responsive" alt=""> is th
 Where <img src="images/sy.png" width="3%" class="img-responsive" alt=""> is sampled with a certain probability from the union set of both <img src="images/union.png" width="8%" class="img-responsive" alt="">:
 They were the first work to experiment on a 1000-way few shot recognition and report the performance on both large-scale and few labelled samples.
 
-## Weights imprinting
+## 1.8 Weights imprinting
 
 Another interesting paper in CVPR'18 on few shot learning is the weight imprinting [10]. The work provides a connection between softmax classifier and metric learning methods. It is based on computing the weights for the new classes as the output activations, while old classes weights are kept the same, followed by normalization. The forward pass would then be computing the dot product between the embedding of the query example and the weights (templates) for each class (the imprinted weights). In case you have multiple examples per class, you would apply average on the embeddings to compute the imprinted weights of this class.
 
@@ -149,8 +149,8 @@ Another interesting paper in CVPR'18 on few shot learning is the weight imprinti
 
 ***
 
-# HRI Setting
-## Differences to Few Shot Learning Literature
+# 2. HRI Setting
+## 2.1 Differences to Few Shot Learning Literature
 
 The fundamental differences between human robot interaction and the current few shot learning setting that we are thinking of: 
 1. the abundance of **temporal information for the different poses of the object**. This has a little similarity to the work on View-Manifold learning, yet with a more realistic scenario containing illumination changes, occlusions and others.
@@ -159,7 +159,7 @@ The fundamental differences between human robot interaction and the current few 
 4. Different challenges introduced by the **cluttered background, the different rigid and non-rigid transformations, occlusions and illumination changes**. 
 5. the **continual learning** of novel objects from **few labeled samples**.
 
-## KUKA Innovation Challenge
+## 2.2 KUKA Innovation Challenge
 So we basically worked with very simple methods for the KUKA innovation challenge to initially have a baseline to mainly provide continuous object detection from few labeled samples from the human teacher. While being able to perform open-set recognition and identify the unknown objects to the robot. The main goal was to get the robot to learn novel tools and their corresponding motions tasks online using human robot interaction.
 
 <video class="center" src="kuka.mp4" width="640" height="480" controls preload></video>
