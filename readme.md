@@ -2,21 +2,22 @@
 
 ## Table of Contents
 
-* Few Shot Learning Literature
-  * General Setup and Datasets
-  * Siamese and Triplet Networks
-    * Cross Entropy Loss
-    * Contrastive Loss
-    * Triplet Loss
-  * Matching Networks 
-  * Meta-Agnostic Model Learning 
-  * View-Manifold Learning
-  * Prototypical Networks 
-  * Activations to Parameters 
-  * Weight Imprinting 
-* Human Robot Interaction Setting 
-  * Differences to Few Shot Literature 
-  * KUKA Innovation Challenge 
+* [Few Shot Learning Literature](#1-few-shot-learning-literature)
+  * [General Setup and Datasets](#11-general-setup-and-datasets)
+  * [Siamese and Triplet Networks](#12-siamese-and-triplet-networks)
+    * [Cross Entropy Loss](#121-cross-entropy-loss)
+    * [Contrastive Loss](#122-contrastive-loss)
+    * [Triplet Loss](#123-triplet-loss)
+  * [Matching Networks](#14-matching-networks)
+  * [Meta-Agnostic Model Learning](#16-maml)
+  * [View-Manifold Learning](#13-view-manifold-learning)
+  * [Prototypical Networks](#15-prototypical-networks)
+  * [Activations to Parameters](#17-activations-to-parameters)
+  * [Weight Imprinting ](#18-weights-imprinting)
+* [Human Robot Interaction Setting](#2-hri-setting)
+  * [Differences to Few Shot Literature](#21-differences-to-few-shot-learning-literature)
+  * [KUKA Innovation Challenge](#22-kuka-innovation-challenge)
+* [References](#references)
 
 
 Few Shot Learning, the ability to learn from few labeled samples, is a vital step in robot manipulation. In order for robots to operate in dynamic and unstructured environments, they need to learn novel objects on the fly from few samples. The current object recognition methods using convolutional networks are based on supervised learning with large-scale datasets such as ImageNet, with hundreds or thousands labeled examples. However, even with large-scale datasets they remain limited in multiple aspects, not all objects in our lives are within the 1000 labels provided in ImageNet. 
