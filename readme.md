@@ -118,7 +118,7 @@ The loss is computed then as the negative log likelihood as shown in the algorit
 
 ## 1.6 MAML
 
-Another direction in few shot learning that is away from metric based learning methods is meta learning. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
+Another direction in few shot learning that is away from metric based learning methods is learning a good model intiailization. MAML [8] creates a model agnostic method, that has a meta objective being optimized over all tasks. The algorithm from the paper:
 
 <div><img src="images/maml.png" width="70%" class="img-responsive" alt=""> </div>
 
